@@ -2,13 +2,20 @@ import React from 'react'
 
 export class Chat extends React.Component {
 
-    componentDidMount(){
-        this.props.io.emit('test', this.props.username)
-        this.props.io.on('test-back', (data) => {
-            alert(data)
-        })
+    state = {
+        userOnline: []
+    }
 
-        this.props.io.emit('send-data-bebas', 'Purwadhika Digital School')
+    componentDidMount(){
+        // this.props.io.emit('test', this.props.username)
+        // this.props.io.on('test-back', (data) => {
+        //     alert(data)
+        // })
+
+        // this.props.io.emit('send-data-bebas', 'Purwadhika Digital School')
+        this.props.io.on('user-online', (data) => {
+            this.setState({userOnline: data})
+        })
     }
 
     render() {
@@ -18,7 +25,19 @@ export class Chat extends React.Component {
                     <div className='col-6'>
                         <div className='border rounded-0 shadow' style={{height : "670px", overflow: "auto", position: "relative"}} >
                             <div className='bg-primary text-white p-3' style={{position: "sticky", top: "0px", right: "0px", left: "0px"}}>
-                                User Online : Ryan, Tommy, Fajri
+                                User Online : 
+                                {
+                                    this.state.userOnline?
+                                        this.state.userOnline.map((value, index) => {
+                                            return(
+                                                <span>
+                                                    {value.name}
+                                                </span>
+                                            )
+                                        })
+                                    :
+                                        null
+                                }
                             </div>
                             <div className="alert alert-warning rounded-0 text-center mx-3 mt-3 mb-5" >
                                 Hello, {this.props.username? this.props.username : null}

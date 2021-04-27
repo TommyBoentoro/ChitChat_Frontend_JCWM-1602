@@ -9,7 +9,8 @@ export class LoginForm extends Component {
     onSubmitButton = () => {
         let name = this.name.value
         let room = this.room.value
-
+        
+        this.props.io.emit('user-join', {name, room})
         this.props.onSubmitButton(name, room)
     }
 
