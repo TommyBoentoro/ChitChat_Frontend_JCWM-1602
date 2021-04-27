@@ -1,7 +1,10 @@
-import { render } from '@testing-library/react';
 import React from 'react'
 import Chat from './Pages/Chat';
 import LoginForm from './Pages/LoginForm';
+
+// Socket.Io
+import Socket from 'socket.io-client'
+const io = Socket('http://localhost:5000/')
 
 class App extends React.Component{
 
@@ -17,7 +20,7 @@ class App extends React.Component{
   render(){
     if(this.state.name === null){
       return (
-        <LoginForm onSubmitButton={this.onChangeState} />
+        <LoginForm io={io} onSubmitButton={this.onChangeState} />
       );
     }
 
