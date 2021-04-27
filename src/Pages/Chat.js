@@ -1,6 +1,16 @@
 import React from 'react'
 
 export class Chat extends React.Component {
+
+    componentDidMount(){
+        this.props.io.emit('test', this.props.username)
+        this.props.io.on('test-back', (data) => {
+            alert(data)
+        })
+
+        this.props.io.emit('send-data-bebas', 'Purwadhika Digital School')
+    }
+
     render() {
         return (
             <div className='container'>

@@ -25,7 +25,7 @@ class App extends React.Component{
     }
 
     return(
-      <Chat username={this.state.name} />
+      <Chat io={io} username={this.state.name} />
     )
   }
 }

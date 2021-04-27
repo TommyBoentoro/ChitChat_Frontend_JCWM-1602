@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 
 export class LoginForm extends Component {
+
+    componentDidMount(){
+        this.props.io.emit('bebas', 'Bebas')
+    }
+
     onSubmitButton = () => {
         let name = this.name.value
         let room = this.room.value
